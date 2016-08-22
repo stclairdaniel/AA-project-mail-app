@@ -7,8 +7,6 @@ class Message {
   }
 }
 
-let messageDraft = new Message();
-
 let messages = {
   sent: [
     {to: "friend@mail.com", subject: "Check this out", body: "It's so cool"},
@@ -21,6 +19,8 @@ let messages = {
 };
 
 let MessageStore = {
+  messageDraft:  new Message,
+
   getInboxMessages () {
     return messages.inbox;
   },
@@ -30,16 +30,16 @@ let MessageStore = {
   },
 
   updateDraftField(field, value) {
-    messageDraft[field] = value;
+    this.messageDraft[field] = value;
   },
 
   sendDraft () {
-    messages.sent.push(messageDraft);
+    messages.sent.push(this.messageDraft);
     messageDraft = new Message();
   },
 
   getMessageDraft () {
-    return messageDraft;
+    return this.messageDraft;
   }
 
 };
